@@ -1,0 +1,19 @@
+restaurant: "Delicious Diner"
+tax: 5.00
+tip:
+  percent: 15.0
+surcharge: 3.00
+
+items:
+  - name: "Burger"
+    price: 15.00
+    attendees: ["Alice"]
+  - name: "Fries"
+    price: 5.00
+    attendees: ["Alice", "Bob"]
+  - name: "Soda"
+    price: 3.00
+    attendees: ["Bob"]
+  - name: "Salad"
+    price: 10.00
+    attendees: ["Charlie"]
