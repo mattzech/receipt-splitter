@@ -16,8 +16,10 @@ type Tip struct {
 type Item struct {
 	Name      string   `yaml:"name"`
 	Price     float64  `yaml:"price"`
+	Quantity  int      `yaml:"quantity"`   // optional, defaults to 1 if 0
 	Attendees []string `yaml:"attendees"`
 }
+
 
 type Receipt struct {
 	Restaurant string  `yaml:"restaurant"`
@@ -43,12 +45,20 @@ func main() {
 	var total float64
 
 	for _, item := range receipt.Items {
-		splitPrice := item.Price / float64(len(item.Attendees))
+		quantity := item.Quantity
+		if quantity == 0 {
+			quantity = 1
+		}
+	
+		totalItemCost := item.Price * float64(quantity)
+		splitPrice := totalItemCost / float64(len(item.Attendees))
+	
 		for _, person := range item.Attendees {
 			subtotals[person] += splitPrice
 		}
-		total += item.Price
+		total += totalItemCost
 	}
+	
 
 	// Calculate tip value from amount or percent
 	var tipValue float64
@@ -60,6 +70,7 @@ func main() {
 		tipValue = 0.0
 	}
 
+	var grandTotal float64
 	fmt.Println("Receipt Breakdown:")
 	for person, subtotal := range subtotals {
 		shareRatio := subtotal / total
@@ -68,6 +79,8 @@ func main() {
 		surchargeShare := shareRatio * receipt.Surcharge
 		totalDue := subtotal + taxShare + tipShare + surchargeShare
 
+		grandTotal += totalDue
+
 		fmt.Printf("\n%s owes:\n", person)
 		fmt.Printf("  Subtotal:  $%.2f\n", subtotal)
 		fmt.Printf("  Tax:       $%.2f\n", taxShare)
@@ -75,4 +88,8 @@ func main() {
 		fmt.Printf("  Surcharge: $%.2f\n", surchargeShare)
 		fmt.Printf("  Total:     $%.2f\n", totalDue)
 	}
+
+	fmt.Printf("\n🔢 Grand Total (all people): $%.2f\n", grandTotal)
+	fmt.Printf("💳 Expected Total (from receipt): $%.2f\n", total + receipt.Tax + tipValue + receipt.Surcharge)
+
 }

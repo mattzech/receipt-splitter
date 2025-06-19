@@ -1,19 +1,27 @@
-restaurant: "Delicious Diner"
-tax: 5.00
+restaurant: "Ranallis Tuesday 6/17"
+tax: 13.07
 tip:
   percent: 15.0
-surcharge: 3.00
+surcharge: 3.24
 
 items:
+  - name: "Beach Bum"
+    price: 8.50
+    quantity: 3
+    attendees: ["Justin", "Matt", "Boos" ]
+  - name: "Garlic Knots"
+    price: 11.00
+    attendees: ["Justin", "John"]
+  - name: "Chicken Tenders"
+    price: 18.00
+    attendees: ["Justin"]
   - name: "Burger"
-    price: 15.00
-    attendees: ["Alice"]
-  - name: "Fries"
-    price: 5.00
-    attendees: ["Alice", "Bob"]
-  - name: "Soda"
-    price: 3.00
-    attendees: ["Bob"]
-  - name: "Salad"
-    price: 10.00
-    attendees: ["Charlie"]
+    price: 17.00
+    attendees: ["Matt", "Courtney"]
+  - name: "Hot Honey"
+    price: 28.98
+    attendees: ["John", "Alex", "Boos"]
+  - name: "Coke"
+    price: 2.50
+    quantity: 3
+    attendees: ["Courtney", "John", "Alex"]
